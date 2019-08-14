@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component;
 import cn.forest.system.remote.SysUserRemote;
 
 @Component
-public class SysUserBack implements SysUserRemote{
+public class SysUserBack implements SysUserRemote {
 
-	@Override
-	public Object getList(Long page,Long pageSize) {
-		return null;
-	}
+  @Override
+  public Object getList(Long page, Long pageSize) {
+    return null;
+  }
 
   @Override
   public int delete(Long id) {

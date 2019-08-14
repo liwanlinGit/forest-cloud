@@ -23,10 +23,10 @@ public class SysLoginLogsAction {
   public int add(@RequestBody SysLoginLogs loginLogs) {
     return sysLoginLogsMapper.insert(loginLogs);
   }
-  
+
   @RequestMapping("/list")
-  public Object getList(Long page,Long pageSize) {
-    Page<SysLoginLogs> pages=new Page<SysLoginLogs>(page,pageSize);
+  public Object getList(Long page, Long pageSize) {
+    Page<SysLoginLogs> pages = new Page<SysLoginLogs>(page, pageSize);
     IPage<SysLoginLogs> selectPage = sysLoginLogsMapper.selectPage(pages, null);
     return new ResultPage<SysLoginLogs>(selectPage);
   }

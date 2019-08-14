@@ -10,25 +10,25 @@ public class SysRole {
 
   @TableField(value = "id")
   private Long id;
-  
+
   @TableField(value = "role_name")
   private String roleName;
-  
+
   @TableField(value = "role_code")
   private String roleCode;
-  
+
   @TableField(value = "is_admin")
   private String isAdmin;
-  
+
   @TableField(value = "is_built_in")
   private String isBuiltIn;
-  
-  @TableField(value = "create_time",fill = FieldFill.INSERT)
+
+  @TableField(value = "create_time", fill = FieldFill.INSERT)
   private String createTime;
-  
-  @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+
+  @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
   private String updateTime;
-  
+
   @TableField(value = "is_delete")
   @TableLogic
   private Integer is_delete;
@@ -96,5 +96,5 @@ public class SysRole {
   public void setIs_delete(Integer is_delete) {
     this.is_delete = is_delete;
   }
-  
+
 }

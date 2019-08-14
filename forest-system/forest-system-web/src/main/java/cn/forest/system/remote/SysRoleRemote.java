@@ -9,5 +9,6 @@ import cn.forest.system.fallback.SysRoleBack;
 @FeignClient(name = "forest-system-server", fallback = SysRoleBack.class)
 public interface SysRoleRemote {
   @RequestMapping("/sys_role/list")
-  public Object getSysRoleList(@RequestParam(value = "page")Long page,@RequestParam(value = "pageSize")Long pageSize);
+  public Object getSysRoleList(@RequestParam(value = "page") Long page,
+      @RequestParam(value = "pageSize") Long pageSize);
 }

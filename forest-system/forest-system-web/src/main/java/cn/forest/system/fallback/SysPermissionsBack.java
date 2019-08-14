@@ -22,5 +22,4 @@ public class SysPermissionsBack implements SysPermissionsRemote {
     return null;
   }
 
-
 }

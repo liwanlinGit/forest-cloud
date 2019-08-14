@@ -14,11 +14,10 @@ public class SysRoleController {
 
   @Autowired
   private SysRoleService sysRoleService;
-  
+
   @RequestMapping("/list")
-  public Map<String, Object> getList(Long page,Long pageSize) {
+  public Map<String, Object> getList(Long page, Long pageSize) {
     return sysRoleService.getList(page, pageSize);
   }
-  
-  
+
 }

@@ -10,141 +10,141 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @TableName("sys_permissions")
 public class SysPermissions implements Serializable {
 
-	@TableField(value="id")
-	private Long id;
-	
-	@TableField(value="create_time",fill=FieldFill.INSERT_UPDATE)
-	private String createTime;
-	
-	@TableField(value="update_time",fill=FieldFill.UPDATE)
-	private String updateTime;
-	
-	@TableField(value="name")
-	private String name;
-	
-	@TableField(value="parent_id")
-	private Long parentId;
-	
-	@TableField(value="tree_depth")
-	private Integer treeDepth;
-	
-	@TableField(value="type")
-	private Integer type;
-	
-	@TableField(value="url")
-	private String url;
-	
-	@TableField(value="priority")
-	private Integer priority;
-	
-	@TableField(value="icon_name")
-	private String iconName;
-	
-	@TableField(value="is_delete")
-	@TableLogic
-	private Integer isDelete;
-	
-	@TableField(value="is_parent")
-	private String isParent;
-	
-	@TableField(exist = false)
-	private boolean hasChildren;
+  @TableField(value = "id")
+  private Long id;
 
-	public Long getId() {
-		return id;
-	}
+  @TableField(value = "create_time", fill = FieldFill.INSERT_UPDATE)
+  private String createTime;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+  @TableField(value = "update_time", fill = FieldFill.UPDATE)
+  private String updateTime;
 
-	public String getCreateTime() {
-		return createTime;
-	}
+  @TableField(value = "name")
+  private String name;
 
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
-	}
+  @TableField(value = "parent_id")
+  private Long parentId;
 
-	public String getUpdateTime() {
-		return updateTime;
-	}
+  @TableField(value = "tree_depth")
+  private Integer treeDepth;
 
-	public void setUpdateTime(String updateTime) {
-		this.updateTime = updateTime;
-	}
+  @TableField(value = "type")
+  private Integer type;
 
-	public String getName() {
-		return name;
-	}
+  @TableField(value = "url")
+  private String url;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  @TableField(value = "priority")
+  private Integer priority;
 
-	public Long getParentId() {
-		return parentId;
-	}
+  @TableField(value = "icon_name")
+  private String iconName;
 
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
+  @TableField(value = "is_delete")
+  @TableLogic
+  private Integer isDelete;
 
-	public Integer getTreeDepth() {
-		return treeDepth;
-	}
+  @TableField(value = "is_parent")
+  private String isParent;
 
-	public void setTreeDepth(Integer treeDepth) {
-		this.treeDepth = treeDepth;
-	}
+  @TableField(exist = false)
+  private boolean hasChildren;
 
-	public Integer getType() {
-		return type;
-	}
+  public Long getId() {
+    return id;
+  }
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-	public String getUrl() {
-		return url;
-	}
+  public String getCreateTime() {
+    return createTime;
+  }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
+  public void setCreateTime(String createTime) {
+    this.createTime = createTime;
+  }
 
-	public Integer getPriority() {
-		return priority;
-	}
+  public String getUpdateTime() {
+    return updateTime;
+  }
 
-	public void setPriority(Integer priority) {
-		this.priority = priority;
-	}
+  public void setUpdateTime(String updateTime) {
+    this.updateTime = updateTime;
+  }
 
-	public String getIconName() {
-		return iconName;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setIconName(String iconName) {
-		this.iconName = iconName;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public Integer getIsDelete() {
-		return isDelete;
-	}
+  public Long getParentId() {
+    return parentId;
+  }
 
-	public void setIsDelete(Integer isDelete) {
-		this.isDelete = isDelete;
-	}
+  public void setParentId(Long parentId) {
+    this.parentId = parentId;
+  }
 
-	public String getIsParent() {
-		return isParent;
-	}
+  public Integer getTreeDepth() {
+    return treeDepth;
+  }
 
-	public void setIsParent(String isParent) {
-		this.isParent = isParent;
-	}
+  public void setTreeDepth(Integer treeDepth) {
+    this.treeDepth = treeDepth;
+  }
+
+  public Integer getType() {
+    return type;
+  }
+
+  public void setType(Integer type) {
+    this.type = type;
+  }
+
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
+
+  public Integer getPriority() {
+    return priority;
+  }
+
+  public void setPriority(Integer priority) {
+    this.priority = priority;
+  }
+
+  public String getIconName() {
+    return iconName;
+  }
+
+  public void setIconName(String iconName) {
+    this.iconName = iconName;
+  }
+
+  public Integer getIsDelete() {
+    return isDelete;
+  }
+
+  public void setIsDelete(Integer isDelete) {
+    this.isDelete = isDelete;
+  }
+
+  public String getIsParent() {
+    return isParent;
+  }
+
+  public void setIsParent(String isParent) {
+    this.isParent = isParent;
+  }
 
   public boolean getHasChildren() {
     return hasChildren;
@@ -153,6 +153,5 @@ public class SysPermissions implements Serializable {
   public void setHasChildren(boolean hasChildren) {
     this.hasChildren = hasChildren;
   }
-	
-	
+
 }

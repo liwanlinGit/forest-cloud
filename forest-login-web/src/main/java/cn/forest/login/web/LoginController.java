@@ -18,8 +18,8 @@ public class LoginController {
   private LoginService loginService;
 
   @RequestMapping("/")
-  public Map<String, Object> getUser(String loginName, String password,HttpServletRequest request) {
-    return loginService.getUser(loginName, password,request);
+  public Map<String, Object> getUser(String loginName, String password, HttpServletRequest request) {
+    return loginService.getUser(loginName, password, request);
   }
 
 }

@@ -40,7 +40,7 @@ public class LoginService {
       if (pass != null && pass.equals(password.trim())) {
         String token = TokenAuthenticationService.addAuthentication(StringUtil.toString(object.get("loginName")));
         addSysLoginLogs(object, request);
-        updateUser(object,request);
+        updateUser(object, request);
         return ResultMessage.success(token);
       } else {
         return ResultMessage.error("密码错误");
@@ -55,6 +55,7 @@ public class LoginService {
     map.put("loginTime", DateUtil.parseDateToStr(new Date(), DateUtil.DATE_TIME_FORMAT_YYYY_MM_DD_HH_MI));
     return sysUserRemote.update(map);
   }
+
   public int addSysLoginLogs(Map map, HttpServletRequest request) {
     Map<String, Object> logsMap = new HashMap<String, Object>();
     logsMap.put("userId", map.get("id"));

@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.forest.system.fallback.SysLoginLogsBack;
 
-@FeignClient(name = "forest-system-server", fallback = SysLoginLogsBack.class )
+@FeignClient(name = "forest-system-server", fallback = SysLoginLogsBack.class)
 public interface SysLoginLogsRemote {
 
   @RequestMapping("/sys_login_logs/list")
-  public Object getList(@RequestParam(value = "page")Long page,@RequestParam(value = "pageSize")Long pageSize);
-  
+  public Object getList(@RequestParam(value = "page") Long page, @RequestParam(value = "pageSize") Long pageSize);
+
 }

@@ -24,19 +24,21 @@ public class SysPermissionsAction {
   public Object getSysPermissions() {
     return sysPermissionsMapper.selectList(null);
   }
-  
+
   @RequestMapping("/listfirstLevel")
-  public Object listfirstLevel(Long page,Long pageSize) {
-    Page<SysPermissions> pages=new Page<SysPermissions>(page,pageSize);
+  public Object listfirstLevel(Long page, Long pageSize) {
+    Page<SysPermissions> pages = new Page<SysPermissions>(page, pageSize);
     QueryWrapper<SysPermissions> queryWrapper = new QueryWrapper<SysPermissions>();
     queryWrapper.eq("tree_depth", 1);
     IPage<SysPermissions> selectPage = sysPermissionsMapper.selectPage(pages, queryWrapper);
-    selectPage.getRecords().forEach(e->{if("true".equals(e.getIsParent())) {
-      e.setHasChildren(true);
-    }});
+    selectPage.getRecords().forEach(e -> {
+      if ("true".equals(e.getIsParent())) {
+        e.setHasChildren(true);
+      }
+    });
     return new ResultPage<SysPermissions>(selectPage);
   }
-  
+
   @RequestMapping("/listChildren")
   public Object listChildren(Long parentId) {
     QueryWrapper<SysPermissions> queryWrapper = new QueryWrapper<SysPermissions>();
@@ -44,5 +46,5 @@ public class SysPermissionsAction {
     List<SysPermissions> selectList = sysPermissionsMapper.selectList(queryWrapper);
     return selectList;
   }
-  
+
 }

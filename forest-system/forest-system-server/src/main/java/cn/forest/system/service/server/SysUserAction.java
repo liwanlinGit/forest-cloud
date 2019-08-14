@@ -39,24 +39,24 @@ public class SysUserAction {
     /* PageInfo<SysUser> selectPage=new PageInfo<SysUser>(selectList); */
     return new ResultPage<SysUser>(selectPage);
   }
-  
+
   @RequestMapping("/delete")
   public int delete(Long id) {
     int deleteById = sysUserMapper.deleteById(id);
     return deleteById;
   }
-  
+
   @RequestMapping("/add")
   public int save(@RequestBody SysUser user) {
     return sysUserMapper.insert(user);
   }
-  
+
   @RequestMapping("/update")
   public int update(@RequestBody SysUser user) {
     System.out.println(user);
     return sysUserMapper.updateById(user);
   }
-  
+
   @RequestMapping("/getById")
   public Object getById(Long id) {
     return sysUserMapper.selectById(id);

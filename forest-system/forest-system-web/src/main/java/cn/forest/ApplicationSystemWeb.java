@@ -12,6 +12,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableCircuitBreaker
 public class ApplicationSystemWeb {
   public static void main(String[] args) {
-	SpringApplication.run(ApplicationSystemWeb.class, args);
+    SpringApplication.run(ApplicationSystemWeb.class, args);
   }
 }

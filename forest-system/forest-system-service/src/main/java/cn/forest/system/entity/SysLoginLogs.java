@@ -10,29 +10,29 @@ public class SysLoginLogs {
 
   @TableField(value = "id")
   private Long id;
-  
-  @TableField(value = "create_time",fill = FieldFill.INSERT)
+
+  @TableField(value = "create_time", fill = FieldFill.INSERT)
   private String createTime;
-  
-  @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+
+  @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
   private String updateTime;
-  
+
   @TableField(value = "role_name")
   private String roleName;
-  
+
   @TableField(value = "user_id")
   private Long userId;
-  
+
   @TableField(value = "ip")
   private String ip;
-  
+
   @TableField(value = "login_name")
   private String loginName;
-  
+
   @TableField(value = "is_delete")
   @TableLogic
-  private Integer  isDelete;
-  
+  private Integer isDelete;
+
   @TableField(value = "user_name")
   private String userName;
 
@@ -107,6 +107,5 @@ public class SysLoginLogs {
   public void setUserName(String userName) {
     this.userName = userName;
   }
-  
-  
+
 }
