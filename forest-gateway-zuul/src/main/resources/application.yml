@@ -1,0 +1,7 @@
+server:  port: 8111
+spring:  application:    name: forest-gateway-zuul
+eureka:  client:    service-url:
+      defaultZone: http://localhost:5555/eureka/            zuul:  routes:    api-a:      path: /forest-system-server/**      serviceId: forest-system-server    api-login:      path: /forest-login-web/**      serviceId: forest-login-web    api-sysWeb:      path: /forest-system-web/**      serviceId: forest-system-web
+  
+
+
