@@ -31,8 +31,8 @@ public class SysUserService {
   }
 
   public Map<String, Object> add(Map<String, ?> map) {
-    int delete = sysUserRemote.add(map);
-    if (delete > 0) {
+    int add = sysUserRemote.add(map);
+    if (add > 0) {
       return ResultMessage.result("添加成功");
     }
     return ResultMessage.error("添加失败");

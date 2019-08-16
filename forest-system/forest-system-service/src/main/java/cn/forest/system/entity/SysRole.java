@@ -26,7 +26,7 @@ public class SysRole {
   @TableField(value = "create_time", fill = FieldFill.INSERT)
   private String createTime;
 
-  @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+  @TableField(value = "update_time", fill = FieldFill.UPDATE)
   private String updateTime;
 
   @TableField(value = "is_delete")

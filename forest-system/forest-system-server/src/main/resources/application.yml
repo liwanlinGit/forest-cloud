@@ -4,10 +4,12 @@ server:
 eureka:
   instance:
     prefer-ip-address: true
-    instance-id: 192.168.1.111:${server.port}
+    instance-id: localhost:${server.port}
+    lease-renewal-interval-in-seconds: 10
+    health-check-url-path: /actuator/health
   client:
     service-url:
-      defaultZone: http://192.168.1.111:5555/eureka/
+      defaultZone: http://localhost:5555/eureka/
       
 spring:
   application:
@@ -19,6 +21,15 @@ spring:
     password: root
     druid:      initial-size: 1
       max-active: 20
+      
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
 
 mybatis-plus:

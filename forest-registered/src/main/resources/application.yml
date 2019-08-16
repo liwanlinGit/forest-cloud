@@ -2,7 +2,7 @@ server:
   port: 5555
 spring:
   cloud:    client:
-      ipAddress: 192.168.1.111  application:    name: forest-registered
+      ipAddress: localhost  application:    name: forest-registered
 eureka:
   instance:
     prefer-ip-address: true

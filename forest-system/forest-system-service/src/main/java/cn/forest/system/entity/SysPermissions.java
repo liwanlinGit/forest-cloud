@@ -13,7 +13,7 @@ public class SysPermissions implements Serializable {
   @TableField(value = "id")
   private Long id;
 
-  @TableField(value = "create_time", fill = FieldFill.INSERT_UPDATE)
+  @TableField(value = "create_time", fill = FieldFill.INSERT)
   private String createTime;
 
   @TableField(value = "update_time", fill = FieldFill.UPDATE)

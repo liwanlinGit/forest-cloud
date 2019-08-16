@@ -1,6 +1,7 @@
 package cn.forest.gateway;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,11 @@ public class AccessFilter extends ZuulFilter {
 
   @Override
   public Object run() throws ZuulException {
+    RequestContext ctx = RequestContext.getCurrentContext();
+    HttpServletRequest request = ctx.getRequest();
+    HttpServletResponse response = ctx.getResponse();
+    String header = response.getHeader("Content-Type");
+    System.out.println(request.getRequestURI()+"-=-="+header);
     return null;
   }
 
