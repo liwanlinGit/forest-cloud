@@ -11,7 +11,7 @@ import cn.forest.system.service.SysLoginLogsService;
 
 @RestController
 @RequestMapping("sysLoginLogs")
-@SysLogs(desc  = "日志管理")
+@SysLogs(desc  = "登录日志管理")
 public class SysLoginLogsController {
 
   @Autowired

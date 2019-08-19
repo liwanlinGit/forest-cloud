@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -19,7 +20,9 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import cn.forest.common.util.AddressIpUtil;
+import cn.forest.common.util.JsonUtil;
 import cn.forest.common.util.RequestMap;
+import cn.forest.common.web.remote.SysExceptionLogsRemote;
 import cn.forest.common.web.remote.SysLogsRemote;
 import cn.forest.common.web.util.SysLogs;
 
@@ -29,18 +32,36 @@ public class SystemLogAspect {
   
   @Autowired
   private SysLogsRemote  sysLogsRemote;
+  @Autowired
+  private SysExceptionLogsRemote sysExceptionLogsRemote;
   
   
   
   @Before("@annotation(cn.forest.common.web.util.SysLogs)")
   public void controllerAspect(JoinPoint joinPoint) throws Exception{
-    ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-    HttpServletRequest request = attributes.getRequest();
-    String method = joinPoint.getSignature().getName();
-    String cla = joinPoint.getTarget().getClass().getName();
-    String methodType = request.getMethod();
-    Class<?> targetClass = Class.forName(cla);
-   String classDesc=targetClass.getAnnotation(SysLogs.class).desc();
+    HttpServletRequest request = getRequest();
+    Map<String, Object> saveSysLogs = saveSysLogs(joinPoint, request);
+    sysLogsRemote.add(saveSysLogs);
+  }
+
+  @AfterThrowing(value="@annotation(cn.forest.common.web.util.SysLogs)",throwing = "e")
+  public void AfterThrowing(JoinPoint joinPoint,Throwable e)  throws Exception{
+    HttpServletRequest request = getRequest();
+    Map<String, Object> saveSysExceptionLogs = saveSysExceptionLogs(joinPoint, request, e);
+    sysExceptionLogsRemote.add(saveSysExceptionLogs);
+  }
+
+  private Map<String, Object> saveSysExceptionLogs(JoinPoint joinPoint, HttpServletRequest request,Throwable e)
+      throws ClassNotFoundException, Exception {
+    Map<String, String> joinPointMap = joinPointMap(joinPoint, request);
+    Class<?> targetClass = Class.forName(joinPointMap.get("cla"));
+    String classDesc=targetClass.getAnnotation(SysLogs.class).desc();
+    String desc = JsonUtil.toJson(e);
+    return params(joinPoint, request, joinPointMap, classDesc, desc);
+  }
+
+  private Map<String, Object> params(JoinPoint joinPoint, HttpServletRequest request, Map<String, String> joinPointMap,
+      String classDesc, String desc) {
     Map<String, Object> map=new HashMap<String, Object>();
     map.put("roleName", "管理员");
     map.put("userId", 1);
@@ -49,19 +70,42 @@ public class SystemLogAspect {
     map.put("modelName", classDesc);
     map.put("ip", AddressIpUtil.getIpAddr(request));
     map.put("url", request.getRequestURI());
-    map.put("method", method);
-    map.put("methodType", methodType);
-    String desc = getControllerMethodDescription(joinPoint,targetClass, method);
+    map.put("method", joinPointMap.get("method"));
+    map.put("methodType", joinPointMap.get("methodType"));
     map.put("description", desc);
-    if("POST".equals(methodType)) {
+    if("POST".equals(joinPointMap.get("methodType"))) {
       map.put("args",  RequestMap.requestToMap(request));
     }else {
       if(joinPoint.getArgs().length>0) {
         map.put("args", Arrays.toString(joinPoint.getArgs()));
       }
     }
-    sysLogsRemote.add(map);
+    return map;
   }
+
+  private HttpServletRequest getRequest() {
+    ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+    return attributes.getRequest();
+  }
+
+  private Map<String, Object> saveSysLogs(JoinPoint joinPoint, HttpServletRequest request)
+      throws ClassNotFoundException, Exception {
+    Map<String, String> joinPointMap = joinPointMap(joinPoint, request);
+    Class<?> targetClass = Class.forName(joinPointMap.get("cla"));
+    String classDesc=targetClass.getAnnotation(SysLogs.class).desc();
+    String desc = getControllerMethodDescription(joinPoint,targetClass, joinPointMap.get("method"));
+    return params(joinPoint, request, joinPointMap, classDesc, desc);
+  }
+  
+  
+  public Map<String, String> joinPointMap(JoinPoint joinPoint,HttpServletRequest request){
+    Map<String, String> map=new HashMap<String, String>();
+    map.put("method", joinPoint.getSignature().getName());
+    map.put("cla", joinPoint.getTarget().getClass().getName());
+    map.put("methodType", request.getMethod());
+    return map;
+  }
+  
   
   public static String getControllerMethodDescription(JoinPoint joinPoint,Class<?> targetClass,String methodName) throws Exception {
     Method[] methods = targetClass.getMethods();
